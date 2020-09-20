@@ -1,4 +1,4 @@
-This project is behind the askcovid19now.com. The goal is to help community by allowing users follow easy COVID-19 related questions and arrive at a decision.
+This project is behind the website http://www.askcovid19now.com. The goal is to help community by allowing users follow easy COVID-19 related questions and arrive at a decision.
 
 ## create project
 This project was setup with the following commands

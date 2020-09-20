@@ -32,6 +32,16 @@ body{
     background-color: teal;
  }
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    text-align: center;
+    color: white;
+  }
+
  .answer {
     text-align: left;
     background: #deeec9;
