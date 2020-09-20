@@ -1,0 +1,44 @@
+.App{
+    text-align: left;
+    font-family: Arial;
+}
+
+.selected {
+    background: #deeec9 !important;
+}
+
+.options {
+    padding: 8px;
+    cursor: pointer;
+    width:100%;
+    background-color: white;
+    color: steelblue;
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    margin: 5px;
+}
+
+body{
+    display: flex;
+    color:white;
+    font-family: 'Segoe UI',;
+    font-size: 18px;
+    background-color: teal;
+ }
+
+ .answer {
+    text-align: left;
+    background: #deeec9;
+    color: black
+ }
+
+ .question {
+    text-align: left;
+    color: rgb(48, 40, 40)
+ }
