@@ -284,10 +284,10 @@ class Main extends Component {
                  <div>
                      <div className="content">
                         <h2>{question}</h2>
-                        {text && <p>{text}</p>}
+                        {text && <div>{text}</div>}
                     
                         {options.map((option, index) => (              
-                        <p key={index} className={`options ${userAnswer === option ? "selected" : null}`}
+                        <p key={index} className={`options ${userAnswer === option ? "selected text-input" : "text-input"}`}
                         onClick= {() => this.checkSelected(option, index)}>
                             {option}
                         </p>
@@ -325,18 +325,18 @@ class Main extends Component {
 
                      <div >
                         <h2>{question}</h2>
-                        {text && <p>{text}</p>}
+                        {text && <div>{text}</div>}
 
                         <section className="border py-3">
                         {options.map((option, index) => ( 
 
-                            <div >
+                            <p >
                                 <label class="container type3">{option}
                                     <input type="checkbox" className="form-check-input filled-in" id={index} onClick = {this.checkBoxHandler} />
                                     <span class="checkmark"></span>
                                 </label>
            
-                            </div>
+                            </p>
                         ))}
                         </section>
                             
