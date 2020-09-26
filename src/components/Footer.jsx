@@ -11,11 +11,19 @@ export default class Footer extends Component {
 
     render() {
         return (
-            <div>
-              <footer className="footer">
-                <span className="text-muted">All Rights Reservied 2020 @AskCovid19Now</span>
+             
+              <footer id="footer">
+                <span className="text-muted">
+                  <p>
+                    For technical support of the site, please contact Brian Zou at support@askcovid19now.com.
+                  </p>
+                  <p>
+                    All Rights Reservied 2020 @AskCovid19Now.
+                  </p>
+                </span>
+                
               </footer>  
-            </div>
+       
         )
     }
 }
