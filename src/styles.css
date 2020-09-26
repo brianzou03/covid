@@ -1,4 +1,6 @@
 .App{
+    position: relative;
+    min-height: 100vh;
     text-align: left;
     font-family: Arial;
 }
@@ -49,8 +51,14 @@ body{
     margin-bottom: 5%;
  }
 
-.footer {
+ .main-content {
+   padding-bottom: 130px;
+   padding-top: 10px;
+ }
+
+#footer {
     position: absolute;
+    margin-top: 20px;
     padding-top: 2%;
     bottom: 0;
     width: 100%;
