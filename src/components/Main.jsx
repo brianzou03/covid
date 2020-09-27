@@ -11,7 +11,9 @@ class Main extends Component {
             type: 1,
             next: [],
             next_id: 0,
+            image: [],
             text: "",
+            question: "",
             description: "",
             answer: "",
             userAnswer:null,   
@@ -40,6 +42,7 @@ class Main extends Component {
                 return {
                     id: data.id,
                     type: data.type,
+                    image: data.image,
                     text: data.text,
                     question:data.question,
                     options: data.options,
@@ -54,6 +57,7 @@ class Main extends Component {
                 return {
                     id: data.id,
                     type: data.type,
+                    image: data.image,
                     question: data.question,
                     description: data.description,
                     done: false  
@@ -65,6 +69,7 @@ class Main extends Component {
                 return {
                     id: data.id,
                     type: data.type,
+                    image: data.image,
                     text: data.text,
                     question:data.question,
                     options: data.options,
@@ -91,6 +96,7 @@ class Main extends Component {
                         id: data.id,
                         type: data.type,
                         text: data.text,
+                        image: data.image,
                         question: data.question,
                         options: data.options,
                         next: data.next,
@@ -103,6 +109,7 @@ class Main extends Component {
                     return {
                         id: data.id,
                         type: data.type,
+                        image: data.image,
                         question: data.question,
                         description: data.description,
                         done: false
@@ -116,6 +123,7 @@ class Main extends Component {
                         id: data.id,
                         type: data.type,
                         text: data.text,
+                        image: data.image,
                         question: data.question,
                         options: data.options,
                         checked: new Set(),
@@ -128,6 +136,27 @@ class Main extends Component {
  
 
         }
+    }
+
+    RestartHander = () => {
+        this.setState({
+            steps: [],
+            id: 0,
+            type: 1,
+            next: [],
+            next_id: 0,
+            image: [],
+            text: "",
+            question: "",
+            description: "",
+            answer: "",
+            userAnswer:null,   
+            options: [], 
+            checked: new Set(),
+            disabled: true,
+            backDisabled: true,
+            done: false
+        })
     }
 
     checkSelected = (option, index) => {
@@ -161,6 +190,7 @@ class Main extends Component {
         step.next = this.state.next;
         step.next_id = this.state.next_id;
         step.text = this.state.text;
+        step.image = this.state.image;
         step.description = this.state.description;
         step.question = this.state.question;
         step.answer = this.state.answer;
@@ -181,6 +211,7 @@ class Main extends Component {
             next: step.next,
             next_id: step.next_id,
             text: step.text,
+            image: step.image,
             description: step.description,
             question: step.question,
             answer: step.answer,
@@ -269,20 +300,27 @@ class Main extends Component {
                             {step.answer !== "" && <div className="answer">
                                 {step.answer}
                             </div>}
+                            {step.description !== "" && <div className="answer">
+                                {step.description}
+                            </div>}
                         </li>
                     </ul>
                 </div>
             ))}
+            
+            <div>Completed on: {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}</div>
+            {<button className="btn btn-info" hidden = {this.state.backDisabled} onClick = {this.RestartHander}>Restart</button>}
             </div>
         );
 
-        const {text, next_id, question, description, options, userAnswer} = this.state 
+        const {text, next_id, image, question, description, options, userAnswer} = this.state 
 
         if (type === 1)
         return (
             <div className="covid">
                  <div>
                      <div className="content">
+                        {image && <img src={`${image[0]}`} width={`${image[1]}`} height={`${image[2]}`} alt=""/>}
                         <h2>{question}</h2>
                         {text && <div>{text}</div>}
                     
@@ -307,6 +345,7 @@ class Main extends Component {
             <div className="covid">
                  <div>
                     <div className="content">
+                        {image && <img src={`${image[0]}`} width={`${image[1]}`} height={`${image[2]}`} alt=""/>}
                         <h2>{question}</h2>
                         <h2>{description}</h2>
                     </div>
@@ -324,6 +363,7 @@ class Main extends Component {
             <div className="covid">
 
                      <div >
+                        {image && <img src={`${image[0]}`} width={`${image[1]}`} height={`${image[2]}`} alt=""/>} 
                         <h2>{question}</h2>
                         {text && <div>{text}</div>}
 

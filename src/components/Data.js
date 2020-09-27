@@ -2,71 +2,149 @@ export const Data = [
     {
         id: 0,
         type: 1,
-        text: `Stop and call 911 if you feel servere chest pain or extreme difficulty breathing`,
-        question: `Is this an emergency?`,
-        options: [`I'm experiencing at least one of these`, `I do not have any of these`],
-        next: [6, 1] // next ids corresponding to options by index
+        image: ["./Doctors.jpg", 200, 200],
+        text: `This app is not intended for the diagnosis or treatment of disease or other conditions, including COVID-19.`,
+        question: `Agree?`,
+        options: [`Yes`, `No`],
+        next: [1, 910] // next ids corresponding to options by index
     },
     {
         id: 1,
         type: 1,
+        image: ["./Ambulance.svg", 200, 200],
+        text: ``,
+        question: `Emergency warning signs?`,
+        options: [`I have one or more of these: Trouble breathing,
+        Persistent pain or pressure in the chest,
+        New confusion,
+        Inability to wake or stay awake,
+        Bluish lips or face`, `I do NOT have any of these`],
+        next: [900, 10] // next ids corresponding to options by index
+    },
+    {
+        id: 10,
+        type: 1,
+        image: ["./Sick.jpg", 200, 200],
+        text: ``,
+        question: `Are you feeling sick?`,
+        options: [`Yes`, `No`],
+        next: [20, 15]
+    },    
+    {
+        id: 15,
+        type: 1,
+        text: ``,
+        question: `Have you come to close contact with a COVID-19 person?`,
+        options: [`Yes`, `No`, `I don't know`],
+        next: [16, 100, 16]
+    },
+    {
+        id: 16,
+        type: 1,
+        text: ``,
+        question: `Are you living in a long-term care facility?`,
+        options: [`Yes`, `No`],
+        next: [20, 100, 20]
+    },
+    {
+        id: 20,
+        type: 3,
+        image: ["./Symptoms.jpg", 300, 200],
+        text: ``,
+        question: `Check ALL symptoms that apply to you:`,
+        options: [
+        `Fever`,
+        `Cough`, 
+        `Shortness of breath`, 
+        `Tied`, 
+        `Muscle aches`, 
+        `Headache`, 
+        `Loss of taste or smell`,
+        `Sore throat`,
+        `Runny nose`,
+        `Vomiting`,
+        `Diarrhea`,
+         `None of them`],
+        next: [30]
+    },
+    {
+        id: 30,
+        type: 1,
         text: ``,
         question: `How old are you?`,
-        options: [`Between 18 and 64`, `65 or older`],
-        next: [2, 4]
+        options: [
+        `0-20`, 
+        `21-64`,
+        `65+`
+        ],
+        next: [40,40,40]
     },
     {
-        id: 2,
+        id: 40,
+        type: 1,
+        image: ["./Gender.png", 200, 200],
+        text: ``,
+        question: `What is your gender?`,
+        options: [
+        `Male`, 
+        `Female`,
+        `I don't want to disclose`
+        ],
+        next: [45,45,45]
+    },
+    {
+        id: 45,
         type: 3,
+        image: ["./Disease.png", 400, 200],
         text: ``,
-        question: `Have you recently stared experiencing any of these symptoms?`,
-        options: [`Fever or chills`, `Headaches`, `Dizzy`, `None of them`],
-        next: [3]
+        question: `Check ALL symptoms that apply to you:`,
+        options: [
+        `Lung disease`,
+        `Heart disease`,
+        `Weakened immune system`,
+        `Obesity`,
+        `Diabetes`,
+        `High blood pressure`,
+        `Cancer`,
+        `HIV`,
+        `None of them`],
+        next: [60]
     },
     {
-        id: 3,
+        id: 60,
         type: 1,
+        image: ["./Travel.jpg", 200, 200],
         text: ``,
-        question: `Do any of these apply to you?`,
-        options: [`Obesity, Smoking`, `None of them`],
-        next: [4, 999]
-    },
-    {
-        id: 4,
-        type: 1,
-        text: ``,
-        question: `In the last 14 days, have you traveled internationally?`,
+        question: `Have you traveled internationally within past 2 weeks?`,
         options: [`I have traveled internationally`, `I have not traveled internationally`],
-        next: [5, 7]
+        next: [110, 110]
     },
     {
-        id: 5,
-        type: 1,
-        text: ``,
-        question: `In the last 14 days, what is your exposure to others who are know to have COVID-19?`,
-        options: [`I have close contact with someone who has COVID-19`, `I have no exposure`, `I don't know`],
-        next: [6, 7, 6]
-    },
-    {
-        id: 6,
+        id: 100,
         type: 2,
-        question: `This is an emergency!`,
-        description: `Stop immediately and call a doctor`,
-        next: [999]
-    },
-    {
-        id: 7,
-        type: 2,
-        question: `No worry!`,
+        question: `Nothing to worry! Stay safe, always put on mask when going out. Keep at least six feet away from other people.`,
         description: `You are fine. nothing to worry.`,
         next: [999]
     },
     {
-        id: 998,
+        id: 110,
         type: 2,
-        question: `Should not reach here`,
-        description: `Something is wrong with the code.`,  
+        question: `Stay home and take care of yourself. Call your medical doctor.`,
+        description: `Make appointment with your medical doctor.`,
+        next: [999]
+    },
+    {
+        id: 900,
+        type: 2,
+        question: `You have life-threatening symptoms! Call 911 or go to the nearest emergency department.`,
+        description: `Stop and act quickly!`,
+        next: [999]
+    },
+    {
+        id: 910,
+        type: 2,
+        question: `You need to agree to the terms and condition in order to use this app. Try again.`,
+        description: `Sorry!`,
         next: [999]
     }
-
 ]

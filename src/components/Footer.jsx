@@ -14,12 +14,10 @@ export default class Footer extends Component {
              
               <footer id="footer">
                 <span className="text-muted">
-                  <p>
+                  <span>
                     For technical support of the site, please contact Brian Zou at support@askcovid19now.com.
-                  </p>
-                  <p>
                     All Rights Reservied 2020 @AskCovid19Now.
-                  </p>
+                  </span>
                 </span>
                 
               </footer>  

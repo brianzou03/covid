@@ -11,9 +11,9 @@ export default class Header extends Component {
 
     render() {
         return (
-            <div>
+            <div className="header">
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                    <div><a href="http://www.askcovid19.com" className="navbar-brand">Suspecion you've got COVID-19 virus, answer some simple questions.</a> </div>
+                    <div><a href="http://www.askcovid19.com" className="navbar-brand">Suspicious you've got COVID-19 virus, ask this screening app.</a> </div>
                 </nav>
             </div>
         )
