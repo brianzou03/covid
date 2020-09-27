@@ -18,6 +18,7 @@ class Main extends Component {
             answer: "",
             userAnswer:null,   
             options: [], 
+            lists:[],
             checked: new Set(),
             disabled: true,
             backDisabled: true,
@@ -35,8 +36,7 @@ class Main extends Component {
         
         const{type, id} =  this.state;
         const data = this.getDataById(id);
-        console.info ("loadData type = " + type)
-
+       
         if (type===1) {
             this.setState(() => {
                 return {
@@ -46,6 +46,7 @@ class Main extends Component {
                     text: data.text,
                     question:data.question,
                     options: data.options,
+                    lists: data.lists,
                     next: data.next,
                     done: false    
                 }
@@ -73,6 +74,7 @@ class Main extends Component {
                     text: data.text,
                     question:data.question,
                     options: data.options,
+                    lists: data.lists,
                     checked: new Set(),
                     next: data.next,
                     done: false    
@@ -88,7 +90,9 @@ class Main extends Component {
     componentDidUpdate(prevProps, prevState){
         const{type, id} =  this.state;
         const data = this.getDataById(id);
-        if(this.state.id !== prevState.id){
+        if(this.state.id === prevState.id){
+           
+        } else {
             if (type===1) {
                 this.setState(() => {
                     return {
@@ -99,6 +103,7 @@ class Main extends Component {
                         image: data.image,
                         question: data.question,
                         options: data.options,
+                        lists: data.lists,
                         next: data.next,
                         done: false
                     }
@@ -126,15 +131,36 @@ class Main extends Component {
                         image: data.image,
                         question: data.question,
                         options: data.options,
-                        checked: new Set(),
+                        lists: data.lists,
                         next: data.next,
                         done: false
                     }
                 })
-                console.info (this.state);
             } 
- 
+        }
 
+        if(this.state.id > prevState.id){
+            console.info ("Next >>");
+            if (type===3) {
+                this.setState(() => {
+                    return {
+                        checked: new Set()
+                    }
+                })
+            } 
+        }
+
+        if(this.state.id < prevState.id){
+            console.info ("<< Back");
+            if (this.state.checked.size > 0) {
+                this.state.checked.forEach ((index) => {
+                    var checkBox = document.getElementById(index);
+                    if (checkBox) {
+                        checkBox.checked = true;
+                    }
+                })
+            }
+            
         }
     }
 
@@ -152,6 +178,7 @@ class Main extends Component {
             answer: "",
             userAnswer:null,   
             options: [], 
+            lists: [],
             checked: new Set(),
             disabled: true,
             backDisabled: true,
@@ -196,6 +223,7 @@ class Main extends Component {
         step.answer = this.state.answer;
         step.userAnswer = this.state.userAnswer;
         step.options = this.state.options;
+        step.lists = this.state.lists;
         step.checked = this.state.checked;
         step.disabled = this.state.disabled;
         step.backDisabled = this.state.backDisabled;
@@ -217,11 +245,12 @@ class Main extends Component {
             answer: step.answer,
             userAnswer: step.userAnswer,   
             options: step.options, 
+            lists: step.lists,
             checked: step.checked ,
             disabled: step.disabled,
             backDisabled: step.backDisabled,
             done: step.done
-        })   
+        })
     }
 
     nextHander = () => {
@@ -237,7 +266,6 @@ class Main extends Component {
             done: false
         })
 
-        console.info(this.state);
     }
 
     finishHander = () => {
@@ -267,17 +295,13 @@ class Main extends Component {
     }
 
     checkBoxHandler = () => {
-        console.info("checkBoxHandler");
         var answer = this.formatAnswersCheckboxes();
-        console.info("answer=(" + answer + ")");
         var next_id = this.state.next[0];
-        console.info("next_id=(" + next_id + ")");
         this.setState({
             next_id: next_id,
             answer: answer,
             disabled: answer === ""
         })
-        console.info("checkBoxHandler" + this.state);
     }
     
     render() {
@@ -313,7 +337,7 @@ class Main extends Component {
             </div>
         );
 
-        const {text, next_id, image, question, description, options, userAnswer} = this.state 
+        const {text, next_id, image, question, description, options, lists, userAnswer} = this.state 
 
         if (type === 1)
         return (
@@ -325,10 +349,16 @@ class Main extends Component {
                         {text && <div>{text}</div>}
                     
                         {options.map((option, index) => (              
+                        <div key={index}>
                         <p key={index} className={`options ${userAnswer === option ? "selected text-input" : "text-input"}`}
                         onClick= {() => this.checkSelected(option, index)}>
                             {option}
                         </p>
+                        {lists && lists[index].length >0 && 
+                            <ul className="list-group list-group-flush">
+                                {lists[index].map( (item, ndx) => (<li key={ndx} className="list-group-item">{item}</li>))}
+                            </ul>}
+                        </div>
                         ))}
                      </div>
                     <hr/>
@@ -370,10 +400,10 @@ class Main extends Component {
                         <section className="border py-3">
                         {options.map((option, index) => ( 
 
-                            <p >
-                                <label class="container type3">{option}
+                            <p key={index}>
+                                <label className="container type3">{option}
                                     <input type="checkbox" className="form-check-input filled-in" id={index} onClick = {this.checkBoxHandler} />
-                                    <span class="checkmark"></span>
+                                    <span className="checkmark"></span>
                                 </label>
            
                             </p>

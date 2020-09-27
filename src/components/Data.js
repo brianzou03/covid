@@ -14,11 +14,12 @@ export const Data = [
         image: ["./Ambulance.svg", 200, 200],
         text: ``,
         question: `Emergency warning signs?`,
-        options: [`I have one or more of these: Trouble breathing,
-        Persistent pain or pressure in the chest,
-        New confusion,
-        Inability to wake or stay awake,
-        Bluish lips or face`, `I do NOT have any of these`],
+        options: [`I have one or more of these:`, `I do NOT have any of these`],
+        lists:[[`Trouble breathing`,
+            `Persistent pain or pressure in the chest`,
+            `New confusion`,
+            `Inability to wake or stay awake`,
+            `Bluish lips or face`],[]],
         next: [900, 10] // next ids corresponding to options by index
     },
     {
@@ -82,7 +83,7 @@ export const Data = [
     {
         id: 40,
         type: 1,
-        image: ["./Gender.png", 200, 200],
+        image: ["./Gender.jpg", 200, 200],
         text: ``,
         question: `What is your gender?`,
         options: [
@@ -95,7 +96,7 @@ export const Data = [
     {
         id: 45,
         type: 3,
-        image: ["./Disease.png", 400, 200],
+        image: ["./Disease.jpg", 400, 200],
         text: ``,
         question: `Check ALL symptoms that apply to you:`,
         options: [
