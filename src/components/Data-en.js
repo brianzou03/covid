@@ -3,9 +3,9 @@ export const DataEn = [
         id: 0,
         type: 1,
         image: ["./Doctors.jpg", 200, 200],
-        text: `This COVID-19 screening app is not a substitute for professional medical advice.`,
+        text: `This COVID-19 screening app is not a substitute for professional medical advice. However, it can help with narrowing down your diagnosis.`,
         link: ``,
-        question: `Agree?`,
+        question: `Terms of Agreement. Read the red text below.`,
         options: [`I agree`, `I do not agree`],
         next: [1, 910] // next ids corresponding to options by index
     },
@@ -19,7 +19,7 @@ export const DataEn = [
         options: [`I have one or more of these:`, `I do not have any of these`],
         lists:[[`Trouble breathing`,
             `Persistent pain or pressure in the chest`,
-            `New confusion`,
+            `Mental confusion`,
             `Inability to wake or stay awake`,
             `Bluish lips or face`],[]],
         next: [900, 10] // next ids corresponding to options by index
@@ -37,9 +37,9 @@ export const DataEn = [
     {
         id: 15,
         type: 1,
-        text: `stay at least 6 feet from other people, wear a mask outside your home`,
+        text: `Stay at least 6 feet from other people, wear a mask outside your home.`,
         link: ``,
-        question: `Have you come to close contact with a COVID-19 person?`,
+        question: `Have you come in close contact with someone who may have COVID-19`,
         options: [`Yes`, `No`, `I don't know`],
         next: [16, 100, 16]
     },
@@ -55,9 +55,9 @@ export const DataEn = [
     {
         id: 20,
         type: 1,
-        text: `These are more typical COVID-19 like symptoms`,
+        text: `These are a few typical COVID-19 symptoms`,
         link: ``,
-        question: `Do you these symptoms?`,
+        question: `Do you have these symptoms?`,
         options: [`Yes`, `No`],
         lists:[[`Shortness of breath`,
             `Loss of taste or smell`],[]],
@@ -87,16 +87,16 @@ export const DataEn = [
         type: 1,
         text: ``,
         link: ``,
-        question: `Cough blood?`,
+        question: `Are you coughing blood?`,
         options: [`Yes`, `No`],
         next: [24, 25] 
     },
     {
         id: 24,
         type: 1,
-        text: `Cough over one teaspoon of bood is a medical emergency.`,
+        text: `Coughing over one teaspoon of blood is a medical emergency, you should seek help - call an ambulance.`,
         link: ``,
-        question: `Over one teaspoon of blood coughed?`,
+        question: `Did you cough over one teaspoon of blood?`,
         options: [`Yes`, `No`],
         next: [900, 25] 
     },
@@ -106,14 +106,14 @@ export const DataEn = [
         image: ["./Fever.jpg", 200, 200],
         text: ``,
         link: ``,
-        question: `Do you have fever (100.4F / 38C)?`,
+        question: `Do you have a fever (Anything above 100.4F / 38C)?`,
         options: [`Yes`, `No`],
         next: [26, 28] 
     },
     {
         id: 26,
         type: 1,
-        text: `If you have high fever, take a warm sponge bath, drink plenty of fluids, take Motrin/Tylenol. Go to emergency room if temperature is persistent.`,
+        text: `If you have a high fever take a warm sponge bath, drink plenty of fluids, and take Motrin and/or Tylenol. Go to the emergency room if the temperature remains unchanged.`,
         link: ``,
         question: `High fever (103F / 39.4C)?`,
         options: [`Yes`, `No`],
@@ -133,7 +133,7 @@ export const DataEn = [
         type: 1,
         text: ``,
         link: ``,
-        question: `Do you Vomiting?`,
+        question: `Are you vomiting or have vomited recently?`,
         options: [`Yes`, `No`],
         next: [30, 31] 
     },
@@ -142,7 +142,7 @@ export const DataEn = [
         type: 1,
         text: ``,
         link: ``,
-        question: `Vomit in the morning?`,
+        question: `Was it in the morning?`,
         options: [`Yes`, `No`],
         next: [31, 31] 
     },
@@ -187,7 +187,7 @@ export const DataEn = [
     {
         id: 40,
         type: 1,
-        text: `COVID-19 affects older age more severely`,
+        text: `COVID-19 affects older people more severely than others`,
         link: ``,
         question: `How old are you?`,
         options: [
@@ -219,7 +219,7 @@ export const DataEn = [
         type: 1,
         text: ``,
         link: ``,
-        question: `Are you over weight?`,
+        question: `Are you overweight?`,
         options: [`Yes`, `No`],
         next: [60,60]
     },
@@ -229,7 +229,7 @@ export const DataEn = [
         image: ["./Travel.jpg", 200, 200],
         text: ``,
         link: ``,
-        question: `Have you traveled internationally within past 2 weeks?`,
+        question: `Have you travelled internationally within the past 2 weeks?`,
         options: [`I have traveled internationally`, `I have not traveled internationally`],
         next: [110, 110]
     },
