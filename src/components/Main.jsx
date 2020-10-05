@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
-import {Data} from './Data';
+import React, { Component } from 'react';
+import {DataEn} from './Data-en';
+import {DataCn} from './Data-cn';
 
 class Main extends Component {
+    
     state = this.getDefaultState();
     
     getDefaultState() {
         return {
+            language: 'English',
             steps: [],
             id: 0,
             type: 1,
@@ -13,10 +16,12 @@ class Main extends Component {
             next_id: 0,
             image: [],
             text: "",
+            link: "",
             question: "",
             description: "",
             answer: "",
             userAnswer:null,   
+            choiceIndex: 0,
             options: [], 
             lists:[],
             checked: new Set(),
@@ -28,8 +33,15 @@ class Main extends Component {
 
     getDataById (id) {
         if (id === 999)
-            return null
-        return Data.filter(data => data.id===id)[0];
+            return null  
+        console.info (this.state.language);
+        
+        if (this.state.language === 'Chinese') {
+            return DataCn.filter(data => data.id===id)[0];
+        } else {
+            return DataEn.filter(data => data.id===id)[0];
+        }
+     
     }
 
     loadData = () => {
@@ -44,6 +56,7 @@ class Main extends Component {
                     type: data.type,
                     image: data.image,
                     text: data.text,
+                    link: data.link,
                     question:data.question,
                     options: data.options,
                     lists: data.lists,
@@ -61,6 +74,8 @@ class Main extends Component {
                     image: data.image,
                     question: data.question,
                     description: data.description,
+                    text: data.text,
+                    link: data.link,
                     done: false  
                 }
             })
@@ -72,6 +87,7 @@ class Main extends Component {
                     type: data.type,
                     image: data.image,
                     text: data.text,
+                    link: data.link,
                     question:data.question,
                     options: data.options,
                     lists: data.lists,
@@ -100,6 +116,7 @@ class Main extends Component {
                         id: data.id,
                         type: data.type,
                         text: data.text,
+                        link: data.link,
                         image: data.image,
                         question: data.question,
                         options: data.options,
@@ -117,6 +134,8 @@ class Main extends Component {
                         image: data.image,
                         question: data.question,
                         description: data.description,
+                        text: data.text,
+                        link: data.link,
                         done: false
                     }
                 })
@@ -128,6 +147,7 @@ class Main extends Component {
                         id: data.id,
                         type: data.type,
                         text: data.text,
+                        link: data.link,
                         image: data.image,
                         question: data.question,
                         options: data.options,
@@ -173,10 +193,12 @@ class Main extends Component {
             next_id: 0,
             image: [],
             text: "",
+            link: "",
             question: "",
             description: "",
             answer: "",
-            userAnswer:null,   
+            userAnswer:null, 
+            choiceIndex: 0,  
             options: [], 
             lists: [],
             checked: new Set(),
@@ -192,6 +214,7 @@ class Main extends Component {
             next_id: next_id,
             answer: option,
             userAnswer: option,
+            choiceIndex: index,
             disabled:false
         })
 
@@ -217,10 +240,12 @@ class Main extends Component {
         step.next = this.state.next;
         step.next_id = this.state.next_id;
         step.text = this.state.text;
+        step.link = this.state.link;
         step.image = this.state.image;
         step.description = this.state.description;
         step.question = this.state.question;
         step.answer = this.state.answer;
+        step.choiceIndex = this.state.choiceIndex;
         step.userAnswer = this.state.userAnswer;
         step.options = this.state.options;
         step.lists = this.state.lists;
@@ -239,10 +264,12 @@ class Main extends Component {
             next: step.next,
             next_id: step.next_id,
             text: step.text,
+            link: step.link,
             image: step.image,
             description: step.description,
             question: step.question,
             answer: step.answer,
+            choiceIndex: step.choiceIndex,
             userAnswer: step.userAnswer,   
             options: step.options, 
             lists: step.lists,
@@ -276,9 +303,25 @@ class Main extends Component {
 
     }
 
-    formatAnswersCheckboxes() {
+    formatAnswersCheckboxes(indexSelected) {
         if (this.state.options === null || this.state.options.length === 0)
             return "";
+
+        console.info('selected ' + indexSelected);
+        var n = this.state.options.length;
+        if (indexSelected < (n-1)) {// clear None of them
+            document.getElementById(n-1).checked = false; 
+            this.state.checked.delete (n-1);
+        } else if (indexSelected === (n-1)) { // clear all
+            this.state.options.map ((option, index) => {
+                var checkBox = document.getElementById(index);
+                if (index < (n-1)) {
+                    checkBox.checked = false;
+                    this.state.checked.delete (index);
+                }
+                return "";
+            })
+        }
 
         var answer = this.state.options.map ((option, index) => {
             var checkBox = document.getElementById(index);
@@ -294,8 +337,8 @@ class Main extends Component {
         return answer;
     }
 
-    checkBoxHandler = () => {
-        var answer = this.formatAnswersCheckboxes();
+    checkBoxHandler = (indexSelected) => {
+        var answer = this.formatAnswersCheckboxes(indexSelected);
         var next_id = this.state.next[0];
         this.setState({
             next_id: next_id,
@@ -303,15 +346,19 @@ class Main extends Component {
             disabled: answer === ""
         })
     }
+
+    printHandler = () => {
+        window.print();
+    }
     
     render() {
-        const {done, steps, next, type} = this.state      
+        const {done, steps, next, type, question, lists, description, text, link} = this.state      
         if (done) 
         return (
             <div className="container covid">
             <h3>These are the questions and your answers</h3>    
             {steps.map((step, index) => (
-                <div className="row"  > 
+                <div key = {index} className="row"  > 
                     <ul>
                         <li>
                             <hr></hr> 
@@ -327,27 +374,51 @@ class Main extends Component {
                             {step.description !== "" && <div className="answer">
                                 {step.description}
                             </div>}
+                            {step.text !== "" && <div className="info">
+                                {step.text}
+                            </div>}
+                            {step.link !== "" && <div className="link"><a href={step.link} target="_blank" rel="noopener noreferrer" >{step.link}</a></div>}
+                            {step.lists && step.lists[step.choiceIndex].length >0 && 
+                            <ul className="list-group list-group-flush">
+                                {step.lists[step.choiceIndex].map( (item, ndx) => (<li key={ndx} className="list-group-item">{item}</li>))}
+                            </ul>}
                         </li>
                     </ul>
                 </div>
             ))}
+             <hr></hr> 
+             <h3>Suggestions from https://www.askcovid19.com</h3>
             
+            <div className="container">
+                <div > 
+                    <h5>{question}</h5>
+                    <h5>{description}</h5>
+                    
+                    {text && <h5 className="info">{text}</h5>}
+                    
+                    {link !== "" && <div className="link"><a href={link} target="_blank" rel="noopener noreferrer" >{link}</a></div>}    
+              
+                </div>  
+            </div>
+            <hr></hr> 
             <div>Completed on: {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}</div>
-            {<button className="btn btn-info" hidden = {this.state.backDisabled} onClick = {this.RestartHander}>Restart</button>}
+            {<button className="btn btn-info" onClick = {this.printHandler}>Print</button>}
+            {<button style={{marginLeft: "10px"}} className="btn btn-info" hidden = {this.state.backDisabled} onClick = {this.RestartHander}>Restart</button>}
             </div>
         );
 
-        const {text, next_id, image, question, description, options, lists, userAnswer} = this.state 
+        const {next_id, image, options, userAnswer} = this.state 
 
         if (type === 1)
         return (
             <div className="covid">
                  <div>
                      <div className="content">
+                    
                         {image && <img src={`${image[0]}`} width={`${image[1]}`} height={`${image[2]}`} alt=""/>}
                         <h2>{question}</h2>
-                        {text && <div>{text}</div>}
-                    
+                        {text && <div className="info">{text}</div>}
+                        {link !== "" && <div className="link"><a href={link} target="_blank" rel="noopener noreferrer" >{link}</a></div>}
                         {options.map((option, index) => (              
                         <div key={index}>
                         <p key={index} className={`options ${userAnswer === option ? "selected text-input" : "text-input"}`}
@@ -367,17 +438,21 @@ class Main extends Component {
                     {next_id === 999 && <button style={{marginLeft: "10px"}} className="btn btn-success"  onClick = {this.finishHander}>Finish</button>}
                                     
                  </div>
+                  
             </div>
         )
 
         if (type === 2)
         return (
             <div className="covid">
+                 
                  <div>
                     <div className="content">
                         {image && <img src={`${image[0]}`} width={`${image[1]}`} height={`${image[2]}`} alt=""/>}
                         <h2>{question}</h2>
                         <h2>{description}</h2>
+                        {text && <div className="info">{text}</div>}
+                        {link !== "" && <div className="link"><a href={link} target="_blank" rel="noopener noreferrer" >{link}</a></div>}
                     </div>
                     <hr/>
                     {<button className="btn btn-info" hidden = {this.state.backDisabled} onClick = {this.backHander}>Back</button>}
@@ -391,18 +466,18 @@ class Main extends Component {
         if (type === 3)
         return (
             <div className="covid">
-
+                    
                      <div >
                         {image && <img src={`${image[0]}`} width={`${image[1]}`} height={`${image[2]}`} alt=""/>} 
                         <h2>{question}</h2>
-                        {text && <div>{text}</div>}
-
+                        {text && <div className="info">{text}</div>}
+                        {link !== "" && <div className="link"><a href={link} target="_blank" rel="noopener noreferrer" >{link}</a></div>}
                         <section className="border py-3">
                         {options.map((option, index) => ( 
 
                             <p key={index}>
                                 <label className="container type3">{option}
-                                    <input type="checkbox" className="form-check-input filled-in" id={index} onClick = {this.checkBoxHandler} />
+                                    <input type="checkbox" className="form-check-input filled-in" id={index} onClick = {this.checkBoxHandler.bind(this, index)} />
                                     <span className="checkmark"></span>
                                 </label>
            
@@ -428,3 +503,4 @@ class Main extends Component {
 }
 
 export default Main
+ 
