@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import {DataEn} from './Data-en';
-import {DataCn} from './Data-cn';
 
 class Main extends Component {
-    
-    state = this.getDefaultState();
+    constructor(props) {
+        super(props)
+        this.state = this.getDefaultState();
+    }
     
     getDefaultState() {
         return {
-            language: 'English',
             steps: [],
             id: 0,
             type: 1,
@@ -31,24 +30,20 @@ class Main extends Component {
         }
     }
 
-    getDataById (id) {
-        if (id === 999)
-            return null  
-        console.info (this.state.language);
-        
-        if (this.state.language === 'Chinese') {
-            return DataCn.filter(data => data.id===id)[0];
-        } else {
-            return DataEn.filter(data => data.id===id)[0];
-        }
-     
+    componentDidMount(){
+        this.loadData();  
     }
 
-    loadData = () => {
-        
+    getDataById (id) {
+        if (id === 999)
+            return null
+        return this.props.data.filter(data => data.id===id)[0];
+    }
+
+    loadData = () => { 
         const{type, id} =  this.state;
         const data = this.getDataById(id);
-       
+
         if (type===1) {
             this.setState(() => {
                 return {
@@ -98,17 +93,21 @@ class Main extends Component {
             })
         } 
     } 
-
-    componentDidMount(){
-        this.loadData();  
-    }
-
+ 
     componentDidUpdate(prevProps, prevState){
         const{type, id} =  this.state;
         const data = this.getDataById(id);
-        if(this.state.id === prevState.id){
-           
-        } else {
+        
+        if(this.state.id !== prevState.id  || this.props !== prevProps)
+        {
+            if(this.state.id !== prevState.id ) {
+                //console.log ("state: " + prevState.id + " ==> " + this.state.id)
+            } else {
+                //console.log (prevProps)
+                //console.log (" =propr change=> ")
+                //console.log (this.props)
+            }
+
             if (type===1) {
                 this.setState(() => {
                     return {
@@ -160,7 +159,7 @@ class Main extends Component {
         }
 
         if(this.state.id > prevState.id){
-            console.info ("Next >>");
+            //console.info ("Next >>");
             if (type===3) {
                 this.setState(() => {
                     return {
@@ -171,7 +170,7 @@ class Main extends Component {
         }
 
         if(this.state.id < prevState.id){
-            console.info ("<< Back");
+            //console.info ("<< Back");
             if (this.state.checked.size > 0) {
                 this.state.checked.forEach ((index) => {
                     var checkBox = document.getElementById(index);
@@ -307,7 +306,7 @@ class Main extends Component {
         if (this.state.options === null || this.state.options.length === 0)
             return "";
 
-        console.info('selected ' + indexSelected);
+        //console.info('selected ' + indexSelected);
         var n = this.state.options.length;
         if (indexSelected < (n-1)) {// clear None of them
             document.getElementById(n-1).checked = false; 
