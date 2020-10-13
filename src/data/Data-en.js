@@ -1,7 +1,7 @@
 export const DataEn = 
 {
 header: {
-    text: 'Screening COVID-19 made simple by answering a few questions'
+    text: 'Screening COVID-19 made simple by answering a few questions.'
 },    
 footer: {
     buttonlanguage: '中文',
@@ -61,7 +61,7 @@ data: [
         type: 1,
         text: `Stay at least 6 feet from other people, wear a mask outside your home.`,
         link: ``,
-        question: `Have you come in close contact with someone who may have COVID-19`,
+        question: `Have you come in close contact with someone who may have COVID-19?`,
         options: [`Yes`, `No`, `I don't know`],
         next: [16, 100, 16]
     },
@@ -77,7 +77,7 @@ data: [
     {
         id: 20,
         type: 1,
-        text: `These are a few typical COVID-19 symptoms`,
+        text: `These are a few typical COVID-19 symptoms.`,
         link: ``,
         question: `Do you have these symptoms?`,
         options: [`Yes`, `No`],
@@ -146,7 +146,7 @@ data: [
         type: 1,
         text: ``,
         link: ``,
-        question: `Do you have headache?`,
+        question: `Do you a have headache?`,
         options: [`Yes`, `No`],
         next: [29, 29] 
     },
@@ -173,7 +173,7 @@ data: [
         type: 1,
         text: ``,
         link: ``,
-        question: `Do you have Diarrhea?`,
+        question: `Do you have diarrhea?`,
         options: [`Yes`, `No`],
         next: [32, 32] 
     },
@@ -185,7 +185,7 @@ data: [
         link: ``,
         question: `Check all symptoms that apply to you:`,
         options: [
-        `Tired`, 
+        `Fatigue`, 
         `Muscle aches`, 
         `Sore throat`,
         `Runny nose`,
@@ -222,7 +222,7 @@ data: [
     {
         id: 45,
         type: 3,
-        text: `Preexisting condition plays an important role in COVID-19.`,
+        text: `Preexisting conditions influence the affect of COVID-19.`,
         link: ``,
         question: `Check all symptoms that apply to you:`,
         options: [
@@ -259,15 +259,15 @@ data: [
         id: 100,
         type: 2,
         question: `Nothing to be concerned at this point! Stay safe.`,
-        description: `You are fine. nothing to worry.`,
-        text: `Remember practicing social distancing!`,
+        description: `You are fine. nothing to worry about.`,
+        text: `Remember to practice social distancing!`,
         next: [999]
     },
     {
         id: 110,
         type: 2,
         question: `Stay home and take care of yourself. Call your medical doctor.`,
-        description: `Make appointment with your medical doctor.`,
+        description: `Make an appointment with your medical doctor.`,
         text: `To get a free COVID-19 test, visit `,
         link: `https://www.hhs.gov/coronavirus/community-based-testing-sites/index.html`,
         next: [999]
@@ -275,7 +275,7 @@ data: [
     {
         id: 900,
         type: 2,
-        question: `You have life-threatening symptoms! Call 911 or go to the nearest emergency department.`,
+        question: `You have life-threatening symptoms! Call 911 or head to the nearest emergency department.`,
         description: `Stop and act quickly!`,
         link: ``,
         next: [999]
@@ -283,8 +283,8 @@ data: [
     {
         id: 910,
         type: 2,
-        question: `You need to agree to the terms and conditions in order to use this app. Try again.`,
-        description: `Sorry!`,
+        question: `You need to agree to the terms and conditions in order to use this application.`,
+        description: `Please check off the Yes box.`,
         link: ``,
         next: [999]
     }
