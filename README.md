@@ -1,4 +1,4 @@
-This project is behind the website https://www.askcovid19now.com. This COVID-19 screen app is intended to help community by allowing users follow easy COVID-19 related questions and arrive at a decision.
+This project is behind the website https://www.askcovid19now.com. This COVID-19 screening app that is intended to help community by allowing users follow easy COVID-19 related questions to help narrow down a diagnosis.
 
 ## create project
 This project was setup with the following commands
@@ -33,5 +33,5 @@ There is a load balancer nginx listening at https 443 and proxy to the nodejs se
 
 ## Author
 #### *Brian Zou*
-I'm currently a senior high school student and has been passionate about helping community with my skills.
-If you have any comments or try to help, feel free to reach out to me at support@askcovid19now.com
+I'm currently a senior high school student and have been passionate about helping the community via Commputer Science.
+If you have any comments or want to help, feel free to reach out to me via support@askcovid19now.com
